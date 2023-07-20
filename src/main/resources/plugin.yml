@@ -8,6 +8,6 @@ api-version: 1.16
 
 commands:
   bloody-mess:
-    aliases: [ "bh" ]
+    aliases: [ "bloodymess", "bm" ]
     description: "Execute various BloodyMess related actions"
     usage: "/bloody-mess [subcommand] ..."

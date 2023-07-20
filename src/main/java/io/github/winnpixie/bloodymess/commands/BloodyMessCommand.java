@@ -45,6 +45,11 @@ public class BloodyMessCommand extends BaseCommand<BloodyMess> {
     }
 
     private void reloadConfiguration(CommandSender sender) {
+        if (!sender.hasPermission("bloody-mess.command.reload") && !sender.isOp()) {
+            sender.spigot().sendMessage(CommandErrors.LACKS_PERMISSIONS);
+            return;
+        }
+
         super.getPlugin().reloadConfig();
 
         var adapter = (BukkitAdapter) getPlugin().configManager.getAdapter();
