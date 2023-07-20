@@ -40,8 +40,10 @@ public class BloodyMessCommand extends BaseCommand<BloodyMess> {
             case "reload":
             case "rl":
                 reloadConfiguration(sender);
+                break;
             default:
                 sender.spigot().sendMessage(CommandErrors.INVALID_ARGUMENTS);
+                break;
         }
 
         return true;
