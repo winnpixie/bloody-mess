@@ -4,7 +4,9 @@ import io.github.winnpixie.bloodymess.BloodyMess;
 import io.github.winnpixie.bloodymess.Config;
 import io.github.winnpixie.bloodymess.utilities.BloodHelper;
 import io.github.winnpixie.hukkit.listeners.EventListener;
+import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -23,14 +25,15 @@ public class EntityDamageListener extends EventListener<BloodyMess> {
     @EventHandler
     private void onEntityDamaged(EntityDamageEvent event) {
         if (event.getFinalDamage() <= 0) return;
-        if (!(event.getEntity() instanceof LivingEntity victim)) return;
+        if (!(event.getEntity() instanceof LivingEntity)) return;
+        LivingEntity victim = (LivingEntity) event.getEntity();
 
         if (victim instanceof Player) {
             if (!isPlayerTriggerEnabled(event)) return;
         } else if (!isEntityTriggerEnabled(event)) return;
 
-        var location = event.getCause() == EntityDamageEvent.DamageCause.FALL ? victim.getLocation() : victim.getEyeLocation();
-        var blockData = BloodHelper.getBlockForEntity(victim.getType());
+        Location location = event.getCause() == EntityDamageEvent.DamageCause.FALL ? victim.getLocation() : victim.getEyeLocation();
+        BlockData blockData = BloodHelper.getBlockForEntity(victim.getType());
         if (blockData == null) return;
 
         victim.getWorld().spawnParticle(Particle.BLOCK_CRACK, location, Config.PARTICLE_COUNT,
@@ -39,8 +42,9 @@ public class EntityDamageListener extends EventListener<BloodyMess> {
 
     private Entity getAttacker(EntityDamageByEntityEvent event) {
         Entity attacker = event.getDamager();
-        if (attacker instanceof Projectile projectile && projectile.getShooter() instanceof LivingEntity shooter) {
-            attacker = shooter;
+        if (attacker instanceof Projectile) {
+            Projectile projectile = (Projectile) attacker;
+            if (projectile.getShooter() instanceof LivingEntity) attacker = (LivingEntity) projectile.getShooter();
         }
 
         return attacker;
@@ -48,14 +52,16 @@ public class EntityDamageListener extends EventListener<BloodyMess> {
 
     private boolean isPlayerTriggerEnabled(EntityDamageEvent event) {
         if (event.getCause() == EntityDamageEvent.DamageCause.FALL) return Config.PLAYER_FALLING;
-        if (!(event instanceof EntityDamageByEntityEvent eveEvent)) return Config.PLAYER_ENVIRONMENT;
+        if (!(event instanceof EntityDamageByEntityEvent)) return Config.PLAYER_ENVIRONMENT;
+        EntityDamageByEntityEvent eveEvent = (EntityDamageByEntityEvent) event;
 
         return getAttacker(eveEvent) instanceof Player ? Config.PLAYER_ATTACKED_BY_PLAYER : Config.PLAYER_ATTACKED_BY_MOB;
     }
 
     private boolean isEntityTriggerEnabled(EntityDamageEvent event) {
         if (event.getCause() == EntityDamageEvent.DamageCause.FALL) return Config.ENTITY_FALLING;
-        if (!(event instanceof EntityDamageByEntityEvent eveEvent)) return Config.ENTITY_ENVIRONMENT;
+        if (!(event instanceof EntityDamageByEntityEvent)) return Config.ENTITY_ENVIRONMENT;
+        EntityDamageByEntityEvent eveEvent = (EntityDamageByEntityEvent) event;
 
         return getAttacker(eveEvent) instanceof Player ? Config.ENTITY_ATTACKED_BY_PLAYER : Config.ENTITY_ATTACKED_BY_ENTITY;
     }

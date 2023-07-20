@@ -27,16 +27,31 @@ public class BloodHelper {
     }
 
     public static BlockData getBlockForEntity(EntityType type) {
-        return switch (type) {
-            case SKELETON, SKELETON_HORSE -> boneBlockData;
-            case WITHER, WITHER_SKELETON -> coalBlockData;
-            case IRON_GOLEM -> ironBlockData;
-            case SNOWMAN -> snowBlockData;
-            case CREEPER -> tntBlockData;
-            case BLAZE, MAGMA_CUBE, STRIDER -> lavaBlockData;
-            case ENDER_DRAGON, ENDERMAN, ENDERMITE -> endPortalBlockData;
-            case ARMOR_STAND -> null; // Living, but not *really*...
-            default -> redstoneBlockData;
-        };
+        switch (type) {
+            case SKELETON:
+            case SKELETON_HORSE:
+                return boneBlockData;
+            case WITHER:
+            case WITHER_SKELETON:
+                return coalBlockData;
+            case IRON_GOLEM:
+                return ironBlockData;
+            case SNOWMAN:
+                return snowBlockData;
+            case CREEPER:
+                return tntBlockData;
+            case BLAZE:
+            case MAGMA_CUBE:
+            case STRIDER:
+                return lavaBlockData;
+            case ENDER_DRAGON:
+            case ENDERMAN:
+            case ENDERMITE:
+                return endPortalBlockData;
+            case ARMOR_STAND:
+                return null; // Living, but not *really*...
+            default:
+                return redstoneBlockData;
+        }
     }
 }
