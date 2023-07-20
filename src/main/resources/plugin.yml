@@ -1,0 +1,13 @@
+name: "BloodyMess"
+version: "0.0.1"
+description: "Displays \"blood\" particles when entities are hurt."
+author: "Hannah"
+website: "https://winnpixie.xyz/"
+main: io.github.winnpixie.bloodymess.BloodyMess
+api-version: 1.16
+
+commands:
+  bloody-mess:
+    aliases: [ "bh" ]
+    description: "Execute various BloodyMess related actions"
+    usage: "/bloody-mess [subcommand] ..."

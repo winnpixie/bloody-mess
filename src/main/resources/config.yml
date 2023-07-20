@@ -1,0 +1,17 @@
+triggers:
+  player:
+    attacked-by-player: true
+    attacked-by-entity: true
+    falling: true
+    environment: true
+  entity:
+    attacked-by-player: true
+    attacked-by-entity: true
+    falling: true
+    environment: true
+
+particles:
+  count: 50
+  x-spread: 0.5
+  y-spread: 0.3
+  z-spread: 0.5
