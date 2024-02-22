@@ -1,4 +1,4 @@
-package io.github.winnpixie.bloodymess.commands;
+package io.github.winnpixie.bloodymess.commands.admin;
 
 import io.github.winnpixie.bloodymess.BloodyMess;
 import io.github.winnpixie.hukkit.commands.BaseCommand;
@@ -19,6 +19,9 @@ public class BloodyMessCommand extends BaseCommand<BloodyMess> {
     private final BaseComponent[] reloadedMessage = new ComponentBuilder("The configuration has been reloaded.")
             .color(ChatColor.GREEN)
             .create();
+    private final BaseComponent[] usageMessage = new ComponentBuilder("=== Bloody Mess ===").color(ChatColor.RED)
+            .append("\n/bloody-mess reload|rl - Reloads the plugin configuration from file.", ComponentBuilder.FormatRetention.NONE)
+            .create();
 
     public BloodyMessCommand(BloodyMess plugin) {
         super(plugin, "bloody-mess");
@@ -32,7 +35,7 @@ public class BloodyMessCommand extends BaseCommand<BloodyMess> {
         }
 
         if (args.length < 1) {
-            sender.spigot().sendMessage(CommandErrors.MISSING_ARGUMENTS);
+            sender.spigot().sendMessage(usageMessage);
             return true;
         }
 

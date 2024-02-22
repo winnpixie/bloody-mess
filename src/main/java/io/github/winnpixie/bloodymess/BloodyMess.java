@@ -1,6 +1,6 @@
 package io.github.winnpixie.bloodymess;
 
-import io.github.winnpixie.bloodymess.commands.BloodyMessCommand;
+import io.github.winnpixie.bloodymess.commands.admin.BloodyMessCommand;
 import io.github.winnpixie.bloodymess.listeners.EntityDamageListener;
 import io.github.winnpixie.hukkit.Hukkit;
 import io.github.winnpixie.hukkit.configs.AnnotatedConfigurationManager;
