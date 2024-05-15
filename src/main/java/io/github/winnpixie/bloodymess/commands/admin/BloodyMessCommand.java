@@ -1,9 +1,9 @@
 package io.github.winnpixie.bloodymess.commands.admin;
 
 import io.github.winnpixie.bloodymess.BloodyMess;
-import io.github.winnpixie.hukkit.commands.BaseCommand;
-import io.github.winnpixie.hukkit.commands.CommandErrors;
-import io.github.winnpixie.hukkit.configs.adapters.BukkitAdapter;
+import io.github.winnpixie.commons.spigot.commands.BaseCommand;
+import io.github.winnpixie.commons.spigot.commands.CommandErrors;
+import io.github.winnpixie.commons.spigot.configs.adapters.BukkitAdapter;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -16,12 +16,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class BloodyMessCommand extends BaseCommand<BloodyMess> {
-    private final BaseComponent[] reloadedMessage = new ComponentBuilder("The configuration has been reloaded.")
+    private final BaseComponent reloadedMessage = new ComponentBuilder("The configuration has been reloaded.")
             .color(ChatColor.GREEN)
-            .create();
-    private final BaseComponent[] usageMessage = new ComponentBuilder("=== Bloody Mess ===").color(ChatColor.RED)
+            .build();
+    private final BaseComponent usageMessage = new ComponentBuilder("=== Bloody Mess ===").color(ChatColor.RED)
             .append("\n/bloody-mess reload|rl - Reloads the plugin configuration from file.", ComponentBuilder.FormatRetention.NONE)
-            .create();
+            .build();
 
     public BloodyMessCommand(BloodyMess plugin) {
         super(plugin, "bloody-mess");
@@ -60,9 +60,9 @@ public class BloodyMessCommand extends BaseCommand<BloodyMess> {
 
         super.getPlugin().reloadConfig();
 
-        BukkitAdapter adapter = (BukkitAdapter) getPlugin().configManager.getAdapter();
+        BukkitAdapter adapter = (BukkitAdapter) getPlugin().configuration.getAdapter();
         adapter.setConfig(getPlugin().getConfig());
-        getPlugin().configManager.load();
+        getPlugin().configuration.load();
 
         sender.spigot().sendMessage(reloadedMessage);
     }

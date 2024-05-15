@@ -3,7 +3,7 @@ package io.github.winnpixie.bloodymess.listeners;
 import io.github.winnpixie.bloodymess.BloodyMess;
 import io.github.winnpixie.bloodymess.Config;
 import io.github.winnpixie.bloodymess.utilities.BloodHelper;
-import io.github.winnpixie.hukkit.listeners.EventListener;
+import io.github.winnpixie.commons.spigot.listeners.EventListener;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.block.data.BlockData;
@@ -38,7 +38,7 @@ public class EntityDamageListener extends EventListener<BloodyMess> {
         BlockData blockData = BloodHelper.getBlockForEntity(victim.getType());
         if (blockData == null) return;
 
-        victim.getWorld().spawnParticle(Particle.BLOCK_CRACK, location, Config.PARTICLE_COUNT,
+        victim.getWorld().spawnParticle(Particle.BLOCK, location, Config.PARTICLE_COUNT,
                 Config.SPREAD_X, Config.SPREAD_Y, Config.SPREAD_Z, blockData);
     }
 

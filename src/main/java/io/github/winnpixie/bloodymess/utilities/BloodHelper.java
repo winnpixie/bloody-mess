@@ -36,7 +36,7 @@ public class BloodHelper {
                 return coalBlockData;
             case IRON_GOLEM:
                 return ironBlockData;
-            case SNOWMAN:
+            case SNOW_GOLEM:
                 return snowBlockData;
             case CREEPER:
                 return tntBlockData;

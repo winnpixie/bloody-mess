@@ -1,6 +1,6 @@
 package io.github.winnpixie.bloodymess;
 
-import io.github.winnpixie.hukkit.configs.Link;
+import io.github.winnpixie.commons.spigot.configs.Link;
 
 public class Config {
     @Link(path = "triggers.player.attacked-by-player")
